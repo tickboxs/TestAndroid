@@ -1,61 +1,24 @@
 pipeline {
     agent any
     stages {
-
-        stage('Docker Container Creation') {
-            steps {
-
-            }
-        }
-
-        stage('Clean') {
-            steps {
-
-            }
-        }
-
-        stage('Build') {
-            steps {
-                sh '''
-
-                '''
-            }
-        }
-
-        stage('Unit Test') {
-            steps {
-                sh '''
-
-                '''
-            }
-        }
-
-        stage('APK Package && Sign') {
+        stage('Publish Branch') {
             when {
                 branch 'publish'
             }
             steps {
-                sh '''
-
-                '''
+		sh docker run --rm -it -w /tmp -v /Users/charliecai/Desktop/TA/TestAndroid:/tmp tapp-android:v1.0.6 /bin/bash /tmp/scripts/publishBranch.sh
             }
         }
-
-        stage('Push To Google Play Alpha Channel') {
+        stage('Other Branch') {
             when {
-                branch 'publish'
+		not {
+		    branch 'publish'
+		}
             }
             steps {
-                sh '''
-
-                '''
+		sh docker run --rm -it -w /tmp -v /Users/charliecai/Desktop/TA/TestAndroid:/tmp tapp-android:v1.0.6 /bin/bash /tmp/scripts/otherBranch.sh
             }
         }
 
-        post {
-            always {
-                
-            }
-        }
     }
 }
