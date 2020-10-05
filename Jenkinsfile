@@ -6,7 +6,7 @@ pipeline {
                 branch 'publish'
             }
             steps {
-		        sh "docker run --rm -it -w /tmp -v /Users/charliecai/Desktop/TA/TestAndroid:/tmp tapp-android:v1.0.6 /bin/bash /tmp/scripts/publishBranch.sh"
+		        sh 'docker run --rm -it -w /tmp -v /Users/charliecai/Desktop/TA/TestAndroid:/tmp tapp-android:v1.0.6 /bin/bash /tmp/scripts/publishBranch.sh'
             }
         }
         stage('Other Branch') {
@@ -16,7 +16,7 @@ pipeline {
                 }
             }
             steps {
-		        sh "docker run --rm -it -w /tmp -v /Users/charliecai/Desktop/TA/TestAndroid:/tmp tapp-android:v1.0.6 /bin/bash /tmp/scripts/otherBranch.sh"
+		        sh 'docker run --rm -it -w /tmp -v /Users/charliecai/Desktop/TA/TestAndroid:/tmp tapp-android:v1.0.6 /bin/bash /tmp/scripts/otherBranch.sh'
             }
         }
 
