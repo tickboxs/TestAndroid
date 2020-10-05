@@ -1,0 +1,35 @@
+default_platform(:android)
+
+platform :android do
+  desc "Clean Project"
+  lane :clean do
+    gradle(task: "clean")
+  end
+
+  desc "Build Project"
+  lane :build do
+    gradle(task: "build")
+  end
+
+  desc "Unit Tests"
+  lane :tests do
+    gradle(task: "test")
+  end
+
+  desc "APK Package and Sign"
+  lane :apk do
+    gradle(task: 'assemble', build_type: 'Release')
+  end
+
+  desc "push to Google Play alpha channel"
+  lane :alpha do
+    upload_to_play_store(track: 'alpha')
+    #slack(message: 'Successfully distributed a new beta build')
+  end
+
+ desc "push to Google Play release channel"
+  lane :release do
+    upload_to_play_store()
+    #slack(message: 'Successfully distributed a new beta build')
+  end
+end
