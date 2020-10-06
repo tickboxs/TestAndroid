@@ -12,7 +12,10 @@ pipeline {
         stage('Other Branch') {
             when {
                 not {
-                    branch 'publish'
+          	    anyOf {
+  		        branch 'publish'
+          	    }
+                
                 }
             }
             steps {
